@@ -12,6 +12,11 @@ namespace SpriteKind {
     export const Dzfire = SpriteKind.create()
     export const Dztrap1 = SpriteKind.create()
     export const Dzprincess = SpriteKind.create()
+    export const Dzprojectile = SpriteKind.create()
+    export const Dzlampkind = SpriteKind.create()
+    export const Dztrap2 = SpriteKind.create()
+    export const Dzenemykind = SpriteKind.create()
+    export const Dztrap3kind = SpriteKind.create()
 }
 
 namespace dazunroom{
@@ -66,19 +71,29 @@ namespace dazunroom{
     }
     let Dzflame: Sprite = null
     let DzTnt: Sprite = null
+    let DzEnemy: Sprite = null
     let Dzprojectile: Sprite = null
+    let Dzlamp:Sprite = null
     let Dzgetfire = 0
     let Dzdash = 0
     let DzHerodirection = 0
-    let Dzgetshoot = 0
+    let Dzappear = 0
+    let Dztrap3: Sprite = null
+    let Dzfan: Sprite = null
+    let Dzgetshoe = 0
     let Dzdoublejump = 0
     let Dzgetbomb = 0
     let Dzhero: Sprite = null
     let Dzinterval = 0
+    
 
     export function init() {
+        sprites.onOverlap(SpriteKind.DzPlayer, SpriteKind.Dzlampkind, function (sprite, otherSprite) {
+            otherSprite.destroy()
+            lantern.startLanternEffect(Dzhero)
+        })
         controller.up.onEvent(ControllerButtonEvent.Pressed, function () {
-            if (Dzgetshoot) {
+            if (Dzgetshoe) {
                 if (DzHerodirection) {
                     Dzhero.setImage(img`
                         . . . . . . . . . . . . . 
@@ -135,7 +150,7 @@ namespace dazunroom{
         })
         controller.B.onEvent(ControllerButtonEvent.Pressed, function () {
             if (Dzdash) {
-                if (DzHerodirection) {
+                if (DzHerodirection)  {
                     Dzhero.setImage(img`
                         e e e e e e e e e e e e e 
                         e 4 4 4 4 4 4 4 4 4 4 e e 
@@ -179,12 +194,6 @@ namespace dazunroom{
                         `)
                 }
             }
-        })
-        sprites.onOverlap(SpriteKind.Projectile, SpriteKind.Dzpoisonflower, function (sprite, otherSprite) {
-            otherSprite.startEffect(effects.spray)
-            otherSprite.startEffect(effects.disintegrate)
-            otherSprite.destroy()
-            sprite.destroy()
         })
         controller.A.onEvent(ControllerButtonEvent.Pressed, function () {
             if (Dzgetbomb) {
@@ -231,12 +240,13 @@ namespace dazunroom{
                         . . . . . . . . . . . . . . . . 
                         `, Dzhero, -200, 0)
                 }
+                Dzprojectile.setKind(SpriteKind.Dzprojectile)
             }
         })
         sprites.onOverlap(SpriteKind.DzPlayer, SpriteKind.Dzparaglider, function (sprite, otherSprite) {
             Dzdash = 1
             otherSprite.destroy()
-            game.splash("push \"B\" in the wind and you can fly ")
+            game.splash("在风中按B可以滑翔")
         })
         scene.onOverlapTile(SpriteKind.DzPlayer, myTiles.dztile5, function (sprite, location) {
             if (controller.B.isPressed() && Dzdash) {
@@ -247,10 +257,7 @@ namespace dazunroom{
         scene.onOverlapTile(SpriteKind.DzPlayer, sprites.castle.shrub, function (sprite, location) {
             tiles.placeOnTile(Dzhero, tiles.getTileLocation(1, 7))
         })
-        scene.onOverlapTile(SpriteKind.DzPlayer, sprites.dungeon.collectibleInsignia, function (sprite, location) {
-            tiles.placeOnTile(Dzhero, tiles.getTileLocation(1, 2))
-            lantern.startLanternEffect(sprite)
-        })
+
         controller.left.onEvent(ControllerButtonEvent.Pressed, function () {
             animation.runImageAnimation(
             Dzhero,
@@ -335,7 +342,7 @@ namespace dazunroom{
         sprites.onOverlap(SpriteKind.DzPlayer, SpriteKind.Dzfire, function (sprite, otherSprite) {
             otherSprite.destroy()
             Dzgetfire = 1
-            game.splash("push \"A\"")
+            game.splash("按A发射火焰")
         })
         controller.left.onEvent(ControllerButtonEvent.Released, function () {
             animation.stopAnimation(animation.AnimationTypes.All, Dzhero)
@@ -357,6 +364,9 @@ namespace dazunroom{
                 . . . . f f f f f f . . . 
                 . . . . . . f f f . . . . 
                 `)
+        })
+        info.onCountdownEnd(function () {
+            gamejam.roomFinished(false)
         })
         controller.right.onEvent(ControllerButtonEvent.Pressed, function () {
             animation.runImageAnimation(
@@ -418,29 +428,172 @@ namespace dazunroom{
             )
             DzHerodirection = 1
         })
-        sprites.onOverlap(SpriteKind.DzPlayer, SpriteKind.Dzshoe, function (sprite, otherSprite) {
-            Dzgetshoot = 1
+        sprites.onOverlap(SpriteKind.DzPlayer, SpriteKind.Dztrap2, function (sprite, otherSprite) {
+            otherSprite.setImage(img`
+                . . . a a a . . . . . . . 
+                . . a a a a . . . . . . . 
+                . . a a a a . . . . . . . 
+                . a a a a . . . . . . . . 
+                . a a 7 a . . . . . . . . 
+                . a a a . . . . . . . . . 
+                a 7 a a . . . . . . . . . 
+                a a a a . . . . . . . . . 
+                a a a a a . . . . . . . . 
+                a a a a 7 a a . . . . . . 
+                . a a a a a a a a a . . . 
+                . . a a a a a 7 a a a a a 
+                . . . . a a a a a a 7 a a 
+                . . . . . . . . a a a a a 
+                . . . . . . . . . . . a a 
+                . . . . . . . . . . . 7 a 
+                . . . . . . . . . . a a a 
+                . . . . . . . . . a a a a 
+                . . . . . . . a a a a a a 
+                . . . . . a a a a 7 a a a 
+                . . . a a a 7 a a a a a . 
+                . . a a a a a a a a . . . 
+                . a a 7 a a a . . . . . . 
+                . a a a a a . . . . . . . 
+                a a a a a . . . . . . . . 
+                a a a a a a a a a a a . . 
+                a a a 7 a a a 7 a a a a . 
+                . a a a a a a a a a 7 a . 
+                . . . . . . . . a a a a . 
+                . . . . . . . . . a a 7 . 
+                . . . . . . . . . a a a . 
+                . . . . . . . . . a a a . 
+                . . . . . . . a a a a a . 
+                . . . . . . a a a a a a . 
+                . . . . 7 a a a 7 a a a . 
+                . a a a a a a a a . . . . 
+                a a a a a a a a . . . . . 
+                a a a a a a . . . . . . . 
+                a a 7 a . . . . . . . . . 
+                a a . . . . . . . . . . . 
+                a a . . . . . . . . . . . 
+                a a . . . . . . . . . . . 
+                a a . . . . . . . . . . . 
+                a 7 a . . . . . . . . . . 
+                a a a a a a . . . . . . . 
+                a a a a a a a a a . . . . 
+                a a a a 7 a a a a a a . . 
+                . . . . a a a 7 a a 7 . . 
+                `)
+            controller.moveSprite(sprite, 0, 0)
+            tiles.placeOnTile(otherSprite, tiles.getTileLocation(11, 2))
+            sprite.follow(otherSprite)
+            otherSprite.setFlag(SpriteFlag.Ghost, true)
+            DzEnemy = sprites.create(img`
+                . . . . . . . . . . . . . . . . . . . . . . . . 
+                . . . . . . . 5 . . . 5 5 . . . 5 . . . . . . . 
+                . . . . . . . 5 . . . 5 5 . . . 5 . . . . . . . 
+                . . . . . . . 5 . . . 5 5 . . . 5 . . . . . . . 
+                . . . . . . . 5 5 . f 5 5 f . 5 5 . . . . . . . 
+                . . . . . . . 5 5 f 1 5 5 1 f 5 5 . . . . . . . 
+                . . . . . . . 5 5 5 1 5 5 1 5 5 5 . . . . . . . 
+                . . . . . . . 5 5 5 5 5 5 5 5 5 5 . . . . . . . 
+                . . . . . . f d 1 1 5 5 5 5 1 1 d f . . . . . . 
+                . . . . . . f d 1 1 1 1 1 1 1 1 d f . . . . . . 
+                . . . . . . f d d d 1 1 1 1 d d d f . . . . . . 
+                . . . . . . f b d b 2 d d 2 b d b f . . . . . . 
+                . . . . . . f c d c 2 1 1 2 c d c f . . . . . . 
+                . . . . . 2 2 f b 1 1 1 1 1 1 b f 2 2 2 . . . . 
+                . . . . 2 2 f f f c d b 1 b d f f f f 2 2 . . . 
+                . . 2 2 2 c 1 1 1 c b f b f c 1 1 1 c 2 2 2 . . 
+                . 2 2 2 f 1 b 1 b 1 f f f f 1 b 1 b 1 2 2 2 2 . 
+                . 2 2 2 f b f b f f f f f f b f b f b 2 2 2 2 . 
+                . 2 2 2 2 2 2 2 2 f f f f f f 2 2 2 2 2 2 2 2 2 
+                . 2 2 2 2 2 2 2 2 f f f f f f 2 2 2 2 2 2 2 2 2 
+                2 2 2 2 2 2 2 2 c f . . . . f c . . . . . . . . 
+                . . . . . d . . c f . . . . f c . . d . . . . . 
+                . . . . . d d . c c . . . . c c . d d . . . . . 
+                . . . . . f f f f c . . . . c f f f f . . . . . 
+                `, SpriteKind.Dzenemykind)
+            tiles.placeOnTile(DzEnemy, tiles.getTileLocation(13, 1))
+            DzEnemy.vy = 10
+            DzEnemy.say("你中陷阱了", 2000)
+            Dztrap3 = sprites.create(img`
+                . . b b b b b b b b b b b b . . 
+                . b b b b b b b b b b b b b b . 
+                b b b b b b b b b b b b b b b b 
+                b b . . b . . b . . b . . b b b 
+                b b . . b . . b . . b . . b b b 
+                b b b b b b b b b b b b b b b b 
+                b b . . b . . b . . b . . b b b 
+                b b . . b . . b . . b . . b b b 
+                b b . . b . . b . . b . . b b b 
+                b b . . b . . b . . b . . b b b 
+                b b b b b b b b b b b b b b b b 
+                b b . . b . . b . . b . . b b b 
+                b b . . b . . b . . b . . b b b 
+                b b . . b . . b . . b . . b b b 
+                b b b b b b b b b b b b b b b b 
+                b b b b b b b b b b b b b b b b 
+                `, SpriteKind.Dzenemykind)
+            tiles.placeOnTile(Dztrap3, tiles.getTileLocation(14, 1))
+            Dztrap3.vy = 50
+            lantern.stopLanternEffect()
+            info.startCountdown(5)
+        })
+        sprites.onOverlap(SpriteKind.Dzprojectile, SpriteKind.Dzpoisonflower, function (sprite, otherSprite) {
+            otherSprite.startEffect(effects.spray)
+            otherSprite.startEffect(effects.disintegrate)
             otherSprite.destroy()
-            game.splash("I can jump now !")
+            sprite.destroy()
+        })
+        sprites.onOverlap(SpriteKind.DzPlayer, SpriteKind.Dzshoe, function (sprite, otherSprite) {
+            Dzgetshoe = 1
+            otherSprite.destroy()
+            game.splash("我可以跳跃了")
         })
         scene.onHitWall(SpriteKind.DzPlayer, function (sprite, location) {
             Dzdoublejump = 1
         })
+        sprites.onOverlap(SpriteKind.Dzprojectile, SpriteKind.Dztrap2, function (sprite, otherSprite) {
+            if (Dzappear) {
+                otherSprite.destroy()
+            }
+        })
         sprites.onOverlap(SpriteKind.DzPlayer, SpriteKind.DzStone, function (sprite, otherSprite) {
             Dzhero.x += -5
-            game.splash("There is a huge stone at the entrance")
+            game.splash("有一个大石头")
         })
         sprites.onOverlap(SpriteKind.DzPlayer, SpriteKind.Dzbomb, function (sprite, otherSprite) {
             otherSprite.destroy()
             Dzgetbomb = 1
-            game.splash("I think i can use the ", "bomb to destroy something.")
+            game.splash("这里有个炸弹", "可以破坏一些东西")
+        })
+        scene.onOverlapTile(SpriteKind.DzPlayer, sprites.dungeon.greenSwitchUp, function (sprite, location) {
+            tiles.setTileAt(location, sprites.dungeon.greenSwitchDown)
+            game.splash("前面出现了一株", "邪恶的植物")
+            lantern.stopLanternEffect()
+            Dztrap3.setImage(img`
+                . . . . . . . . . . . . . . . . 
+                . . . . . a a . . . . . . . . . 
+                . . . . . a 6 a . . . . . . . . 
+                . . . . . . a 6 a . . . . . . . 
+                . . . . . . . a 6 a . . . . . . 
+                . . . . . . . a 6 6 . . . . . . 
+                . . . . . . . a 6 b 6 . . . . . 
+                . . . . . . 6 b 6 a 6 . . . . . 
+                . . . . . 6 a 6 b a 8 . . . . . 
+                . . . . 6 a b b a 8 6 a . . . . 
+                . . . . 6 a 6 a 6 8 6 a . . . . 
+                . . . . a b 6 b 8 8 6 a . . . . 
+                . . . . a b 6 b 8 6 6 a . . . . 
+                . . . . a b 6 b b 6 6 a . . . . 
+                . . . . a b b 6 b 6 a . . . . . 
+                . . . . . a b 6 b a . . . . . . 
+                `)
+            Dztrap3.startEffect(effects.coolRadial)
+            Dzappear = 1
         })
         sprites.onOverlap(SpriteKind.DzPlayer, SpriteKind.Dztrap1, function (sprite, otherSprite) {
             tiles.placeOnTile(sprite, tiles.getTileLocation(1, 3))
             scene.cameraShake(4, 500)
         })
         controller.menu.onEvent(ControllerButtonEvent.Pressed, function () {
-            tiles.placeOnTile(Dzhero, tiles.getTileLocation(2, 14))
+            
         })
         controller.B.onEvent(ControllerButtonEvent.Released, function () {
             if (Dzdash) {
@@ -477,13 +630,22 @@ namespace dazunroom{
             cubicbird.destroyAllSpriteOfKind(SpriteKind.Dzfire)
             cubicbird.destroyAllSpriteOfKind(SpriteKind.Dzprincess)
             cubicbird.destroyAllSpriteOfKind(SpriteKind.Dztrap1)
+            cubicbird.destroyAllSpriteOfKind(SpriteKind.Player)
+            cubicbird.destroyAllSpriteOfKind(SpriteKind.Projectile)
+            cubicbird.destroyAllSpriteOfKind(SpriteKind.Food)
+            cubicbird.destroyAllSpriteOfKind(SpriteKind.Enemy)
+            cubicbird.destroyAllSpriteOfKind(Dzfan.kind())
+            cubicbird.destroyAllSpriteOfKind(SpriteKind.Dzprojectile)
+            cubicbird.destroyAllSpriteOfKind(SpriteKind.Dzlampkind)
+            cubicbird.destroyAllSpriteOfKind(SpriteKind.Dztrap2)
+            cubicbird.destroyAllSpriteOfKind(SpriteKind.Dzenemykind)
+            cubicbird.destroyAllSpriteOfKind(SpriteKind.Dztrap3kind)
             gamejam.roomFinished(true)
         })
         sprites.onOverlap(SpriteKind.DzPlayer, SpriteKind.Dzpoisonflower, function (sprite, otherSprite) {
             tiles.placeOnTile(Dzhero, tiles.getTileLocation(2, 8))
-            game.splash("This plant is poisonous,I can not touch it.")
+            game.splash("植物有毒不能碰")
         })
-        
         scene.setBackgroundImage(img`
             6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 
             6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 
@@ -606,14 +768,14 @@ namespace dazunroom{
             c c c c c c c c c c c c c c c c c c c c c c c c c c c c c c c c c c c c c c c c c c c c c c c c c c c c c c c c c c c c c c c c c c c c c c c c c c c c c c c c c c c c c c c c c c c c c c c c c c c c c c c c c c c c c c c c c c c c c c c c c c c c c c c c c c c c c c c c c c c c c c c c c c c c c c c c c c c c c c c c 
             c c c c c c c c c c c c c c c c c c c c c c c c c c c c c c c c c c c c c c c c c c c c c c c c c c c c c c c c c c c c c c c c c c c c c c c c c c c c c c c c c c c c c c c c c c c c c c c c c c c c c c c c c c c c c c c c c c c c c c c c c c c c c c c c c c c c c c c c c c c c c c c c c c c c c c c c c c c c c c c c 
             `)
-        tiles.setTilemap(tiles.createTilemap(hex`100010000405050505050505050505050505050106000000000c00000000000000000008060000000000000000000000000000080600000b0000000b0000000000000008060a0a0a0f0f0f0a0a0a0a0a0a0a0a0806000000000000000000000000000008060e0e0e00000000000000000000000806000000000e000000000000000000080600000e000000000000000000001008060d0d0d0d0d0d0d0d0d0d0d0d0d0d08060000001212121212121213000000080600000000000000000000000000110806000009090000000000000909090908060000000009000000000000090909080600000000000000000000000000000802070707070707070707070707070703`, img`
-            2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 
-            2 . . . . 2 . . . . . . . . . 2 
+        tiles.setTilemap(tiles.createTilemap(hex`1000100004050505050505050505050505050501060000000000000000001300000000080600000000000000000000000000000806000012000000120000000000000008060a0a0a0d0d0d0a0a0a0a0a0a0a0a08060000000000000000000000000000080600000000000000000000000000000806000000000c000000000000000000080600000c000000000000000000000e08060b0b0b0b0b0b0b0b0b0b0b0b0b0b080600000010101010101010110000000806000000000000000000000000000f0806000009090000000000000909090908060000000009000000000000090909080600000000000000000000000000000802070707070707070707070707070703`, img`
+            2 2 2 2 2 2 2 2 2 2 2 . . . . 2 
+            2 . . . . . . . . . . . . . . 2 
             2 . . . . . . . . . . . . . . 2 
             2 . . 2 . . . 2 . . . . . . . 2 
             2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 
             2 . . . . . . . . . . . . . . 2 
-            2 2 2 2 . . . . . . . . . . . 2 
+            2 . . . . . . . . . . . . . . 2 
             2 . . . . 2 . . . . . . . . . 2 
             2 . . 2 . . . . . . . . . . . 2 
             2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 
@@ -623,7 +785,7 @@ namespace dazunroom{
             2 . . . . 2 . . . . . . 2 2 2 2 
             2 . . . . . . . . . . . . . . 2 
             2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 
-            `, [myTiles.transparency16,sprites.dungeon.greenOuterNorthEast,sprites.dungeon.greenOuterSouthEast,sprites.dungeon.greenOuterSouthWest,sprites.dungeon.greenOuterNorthWest,sprites.dungeon.greenOuterNorth0,sprites.dungeon.greenOuterWest0,sprites.dungeon.greenOuterSouth0,sprites.dungeon.greenOuterEast0,sprites.dungeon.floorDark0,sprites.dungeon.purpleOuterSouth0,sprites.dungeon.purpleOuterNorth2,sprites.dungeon.purpleOuterSouth2,sprites.builtin.forestTiles2,sprites.builtin.forestTiles0,sprites.dungeon.purpleOuterSouth1,sprites.dungeon.collectibleInsignia,sprites.castle.shrub,myTiles.dztile5,myTiles.dztile3], TileScale.Sixteen))
+            `, [myTiles.transparency16,sprites.dungeon.greenOuterNorthEast,sprites.dungeon.greenOuterSouthEast,sprites.dungeon.greenOuterSouthWest,sprites.dungeon.greenOuterNorthWest,sprites.dungeon.greenOuterNorth0,sprites.dungeon.greenOuterWest0,sprites.dungeon.greenOuterSouth0,sprites.dungeon.greenOuterEast0,sprites.dungeon.floorDark0,sprites.dungeon.purpleOuterSouth0,sprites.builtin.forestTiles2,sprites.builtin.forestTiles0,sprites.dungeon.purpleOuterSouth1,sprites.dungeon.collectibleInsignia,sprites.castle.shrub,myTiles.dztile5,myTiles.dztile3,sprites.dungeon.purpleOuterNorth1,sprites.dungeon.greenSwitchUp], TileScale.Sixteen))
         Dzinterval = 200
         Dzhero = sprites.create(img`
             . . . . f f f f . . . . . 
@@ -644,8 +806,9 @@ namespace dazunroom{
             . . . f f . . f f . . . . 
             `, SpriteKind.DzPlayer)
         Dzgetbomb = 0
+        let Dzlose = 0
         Dzdoublejump = 0
-        Dzgetshoot = 0
+        Dzgetshoe = 0
         let Dztrapflag = 0
         tiles.placeOnTile(Dzhero, tiles.getTileLocation(3, 14))
         scene.cameraFollowSprite(Dzhero)
@@ -777,7 +940,7 @@ namespace dazunroom{
             . . . 6 c c 8 . . . . 6 a a 8 . . . . 6 c c 8 . 
             `, SpriteKind.Dzpoisonflower)
         tiles.placeOnTile(Dzpoisonflower, tiles.getTileLocation(12, 8))
-        let Dzfan = sprites.create(img`
+        Dzfan = sprites.create(img`
             . . . . . . . . . . . . . . . . 
             . . . . . . . . . . . . . . . . 
             . . . . . . . . . . . . . . . . 
@@ -795,7 +958,7 @@ namespace dazunroom{
             . e e . e e e e e . . . . . . . 
             . . . . . . . . . . . . . . . . 
             `, SpriteKind.Dzparaglider)
-        tiles.placeOnTile(Dzfan, tiles.getTileLocation(1, 10))
+        tiles.placeOnTile(Dzfan, tiles.getTileLocation(1, 12))
         Dzfan.startEffect(effects.blizzard)
         Dzfan = sprites.create(img`
             . . . d d d d d d d d d . . . . 
@@ -834,7 +997,7 @@ namespace dazunroom{
             . . . . . . 4 4 4 4 . . . . . . 
             . . . . . . . . . . . . . . . . 
             `, SpriteKind.Dzfire)
-        tiles.placeOnTile(Dzfirepearl, tiles.getTileLocation(1, 5))
+        tiles.placeOnTile(Dzfirepearl, tiles.getTileLocation(5, 5))
         let Dztrap1 = sprites.create(img`
             . . . . . . . . d . . . . . . . 
             . . . . . . . . d . . . . . . . 
@@ -893,6 +1056,45 @@ namespace dazunroom{
             . . . . . f f . . f f . . . . . 
             `, SpriteKind.Dzprincess)
         tiles.placeOnTile(Dzprincess, tiles.getTileLocation(14, 3))
+        let Dzlamp = sprites.create(img`
+            . . . . . . . . . . . . . . . . 
+            f f f f f f f f f . . . . . . . 
+            . . . . . . . f f . . . . . . . 
+            . . . . . . . f f . . . . . . . 
+            . . . . . . . f f . . . . . . . 
+            . . . . f f f f f f f f . . . . 
+            . . . . f . 4 4 4 4 . f . . . . 
+            . . . . f . 4 5 5 4 . f . . . . 
+            . . . . f . 4 5 5 4 . f . . . . 
+            . . . . f . 4 4 4 4 . f . . . . 
+            . . . . f . . 2 2 . . f . . . . 
+            . . . . f f . 2 2 . f f . . . . 
+            . . . . f f f f f f f f . . . . 
+            . . . . . . . . . . . . . . . . 
+            . . . . . . . . . . . . . . . . 
+            . . . . . . . . . . . . . . . . 
+            `, SpriteKind.Dzlampkind)
+        tiles.placeOnTile(Dzlamp, tiles.getTileLocation(1, 1))
+        Dztrap3 = sprites.create(img`
+            . . . . . . . . . . . . . . . . 
+            . . . . . . . . . . . . . . . . 
+            . . . . . . . . . . . . . . . . 
+            . . . . . . . . . . . . . . . . 
+            . . . . . . . . . . . . . . . . 
+            . . . . . . . . . . . . . . . . 
+            . . . . . . . . . . . . . . . . 
+            . . . . . . . . . . . . . . . . 
+            . . . . . . . . . . . . . . . . 
+            . . . . . . . . . . . . . . . . 
+            . . . . . . . . . . . . . . . . 
+            . . . . . . . . . . . . . . . . 
+            . . . . . . . . . . . . . . . . 
+            . . . . . . . . . . . . . . . . 
+            . . . . . . . . . . . . . . . . 
+            a a a a a a a a a a a a a a a a 
+            `, SpriteKind.Dztrap2)
+        tiles.placeOnTile(Dztrap3, tiles.getTileLocation(11, 3))
+        Dzappear = 0
         game.onUpdateInterval(2000, function () {
             Dztrapflag += 1
             if (Dztrapflag % 2 == 0) {
@@ -906,6 +1108,11 @@ namespace dazunroom{
                     值.setFlag(SpriteFlag.Ghost, true)
                 }
             }
+        })
+        scene.onOverlapTile(SpriteKind.DzPlayer, sprites.dungeon.collectibleInsignia, function (sprite, location) {
+            tiles.placeOnTile(Dzhero, tiles.getTileLocation(1, 3))
+            lantern.startLanternEffect(Dzlamp)
+            lantern.setLightBandWidth(8)
         })
     }
 }

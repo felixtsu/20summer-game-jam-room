@@ -1,5 +1,4 @@
 // Add your code here
-
 namespace SpriteKind {
     export const Zhr = SpriteKind.create()
     export const ZhrE = SpriteKind.create()
@@ -14,10 +13,35 @@ namespace SpriteKind {
 namespace sosroom{
     let Zhr直升机: Sprite = null
     let Zhr铲子: Sprite = null
-    let Zhrr铲子 = 0
     let Zhr_敌人: Sprite = null
     let zhrr钥 = 0
+    let Zhr传送: Sprite = null
+    let Zhr钥: Sprite = null
+    let Zhrr铲子 = 0
     let Zhr: Sprite = null
+    function zhr刺客 () {
+        Zhr_敌人 = sprites.create(img`
+            . . . . . . f f f f . . . . . . 
+            . . . . f f f 2 2 f f f . . . . 
+            . . . f f f 2 2 2 2 f f f . . . 
+            . . f f f e e e e e e f f f . . 
+            . . f f e 2 2 2 2 2 2 e e f . . 
+            . . f e 2 f f f f f f 2 e f . . 
+            . . f f f f e e e e f f f f . . 
+            . f f e f b f 4 4 f b f e f f . 
+            . f f e f b f 4 4 f b f e f f . 
+            . f e f 4 d d d d d d 4 f e f . 
+            f d f e f f f f f f f f e f f e 
+            f b f f e f f f f f f e 4 f d d 
+            f b f 4 f 2 f f f f 2 f 1 e d d 
+            f c f . f 2 2 f f 2 2 f 4 4 e e 
+            . f f . f 4 4 5 5 4 4 f . . . . 
+            . . . . f f f f f f f f . . . . 
+            `, SpriteKind.ZhrE)
+        tiles.placeOnRandomTile(Zhr_敌人, sprites.castle.tileDarkGrass3)
+        Zhr_敌人.setVelocity(50, 50)
+        Zhr_敌人.setFlag(SpriteFlag.BounceOnWall, true)
+    }
     function zhrr刺客 () {
         cubicbird.destroyAllSpriteOfKind(SpriteKind.ZhrE)
         lantern.stopLanternEffect()
@@ -64,30 +88,6 @@ namespace sosroom{
         tiles.placeOnRandomTile(Zhr铲子, sprites.castle.tileDarkGrass3)
     }
 
-    function zhr刺客 () {
-        Zhr_敌人 = sprites.create(img`
-            . . . . . . f f f f . . . . . . 
-            . . . . f f f 2 2 f f f . . . . 
-            . . . f f f 2 2 2 2 f f f . . . 
-            . . f f f e e e e e e f f f . . 
-            . . f f e 2 2 2 2 2 2 e e f . . 
-            . . f e 2 f f f f f f 2 e f . . 
-            . . f f f f e e e e f f f f . . 
-            . f f e f b f 4 4 f b f e f f . 
-            . f f e f b f 4 4 f b f e f f . 
-            . f e f 4 d d d d d d 4 f e f . 
-            f d f e f f f f f f f f e f f e 
-            f b f f e f f f f f f e 4 f d d 
-            f b f 4 f 2 f f f f 2 f 1 e d d 
-            f c f . f 2 2 f f 2 2 f 4 4 e e 
-            . f f . f 4 4 5 5 4 4 f . . . . 
-            . . . . f f f f f f f f . . . . 
-            `, SpriteKind.ZhrE)
-        tiles.placeOnRandomTile(Zhr_敌人, sprites.castle.tileDarkGrass3)
-        Zhr_敌人.setVelocity(50, 50)
-        Zhr_敌人.setFlag(SpriteFlag.BounceOnWall, true)
-    }
-
 
     export function init() {
         sprites.onOverlap(SpriteKind.Zhr, SpriteKind.ZhrE, function (sprite, otherSprite) {
@@ -101,6 +101,63 @@ namespace sosroom{
         })
         sprites.onOverlap(SpriteKind.Zhr, SpriteKind.Zhr传送门, function (sprite, otherSprite) {
             tiles.placeOnRandomTile(Zhr, sprites.castle.tileDarkGrass2)
+        })
+        scene.onOverlapTile(SpriteKind.Zhr, myTiles.zhrtile2, function (sprite, location) {
+            if (Zhrr铲子 == 1) {
+                tiles.setTileAt(tiles.getTileLocation(3, 3), myTiles.zhrtile5)
+                Zhr钥 = sprites.create(img`
+                    . . . . . . . . . . . . . . . . 
+                    . . . . 5 5 5 5 5 5 5 5 . . . . 
+                    . . . . 5 . . . . . . 5 . . . . 
+                    . . . . 5 . . . . . . 5 . . . . 
+                    . . . . 5 . . . . . . 5 . . . . 
+                    . . . . 5 . . . . . . 5 . . . . 
+                    . . . . 5 5 5 5 5 5 5 5 . . . . 
+                    . . . . . . . 5 5 . . . . . . . 
+                    . . . . . . . 5 5 . . . . . . . 
+                    . . . . . . . 5 5 . . . . . . . 
+                    . . . . . . . 5 5 . . . . . . . 
+                    . . . . . . . 5 5 . . . . . . . 
+                    . . . . . . . 5 5 . . . . . . . 
+                    . . . . . . . 5 5 5 . . . . . . 
+                    . . . . . . . 5 5 . . . . . . . 
+                    . . . . . . . 5 5 5 . . . . . . 
+                    `, SpriteKind.Zhr钥匙)
+                tiles.placeOnTile(Zhr钥, tiles.getTileLocation(3, 2))
+            }
+        })
+        scene.onOverlapTile(SpriteKind.Zhr, sprites.dungeon.collectibleBlueCrystal, function (sprite, location) {
+            game.splash("你身上有多少个装备")
+            if (game.askForNumber("") == 7) {
+                tiles.setTileAt(tiles.getTileLocation(13, 3), sprites.castle.tileDarkGrass1)
+                Zhr传送 = sprites.create(img`
+                    f f f f f f f f f f f f f f f f 
+                    f f f f f f f f f f f f f f f f 
+                    f f f f f f f f c c c f f f f f 
+                    f 6 6 f f f c c c c f f f f f f 
+                    f 6 f f f f c f f f f f f f f f 
+                    f 6 6 f f f c f f 6 6 6 6 6 6 f 
+                    f f 6 6 6 f a a a f f f f f 6 6 
+                    c f f f 6 6 a a a c f f f f f f 
+                    c c f f f f a a a c c c f f f f 
+                    f c c c c c c f 6 f f c c f f f 
+                    f f f f f f f 6 f f f f c f f f 
+                    f f f f f f 6 6 f f f f c c f f 
+                    f f f f 6 6 f f f f f f f f f f 
+                    f f f 6 6 f f f f f f f f f f f 
+                    f f f 6 f f f f f f f f f f f f 
+                    f f f f f f f f f f f f f f f f 
+                    `, SpriteKind.Zhr传送门)
+                tiles.placeOnTile(Zhr传送, tiles.getTileLocation(15, 0))
+            } else {
+                gamejam.roomFinished(false)
+                cubicbird.destroyAllSpriteOfKind(SpriteKind.Zhr)
+                cubicbird.destroyAllSpriteOfKind(SpriteKind.ZhrE)
+                cubicbird.destroyAllSpriteOfKind(SpriteKind.Zhr钥匙)
+                cubicbird.destroyAllSpriteOfKind(SpriteKind.Zhr直升机)
+                cubicbird.destroyAllSpriteOfKind(SpriteKind.Zhr铲子)
+                cubicbird.destroyAllSpriteOfKind(SpriteKind.Zhr传送门)
+            }
         })
         scene.onOverlapTile(SpriteKind.Zhr, myTiles.zhrtile4, function (sprite, location) {
             if (zhrr钥 == 1) {
@@ -135,19 +192,19 @@ namespace sosroom{
             Zhr铲子.destroy()
         })
         sprites.onOverlap(SpriteKind.Zhr, SpriteKind.Zhr直升机, function (sprite, otherSprite) {
+            gamejam.roomFinished(true)
             cubicbird.destroyAllSpriteOfKind(SpriteKind.Zhr)
             cubicbird.destroyAllSpriteOfKind(SpriteKind.ZhrE)
             cubicbird.destroyAllSpriteOfKind(SpriteKind.Zhr直升机)
             cubicbird.destroyAllSpriteOfKind(SpriteKind.Zhr钥匙)
             cubicbird.destroyAllSpriteOfKind(SpriteKind.Zhr传送门)
             cubicbird.destroyAllSpriteOfKind(SpriteKind.Zhr铲子)
-            gamejam.roomFinished(true)
         })
         sprites.onOverlap(SpriteKind.Zhr, SpriteKind.Zhr钥匙, function (sprite, otherSprite) {
-            let Zhr钥: Sprite = null
             zhrr钥 = 1
             Zhr钥.destroy()
         })
+
         tiles.setTilemap(tiles.createTilemap(hex`1000100001010101010101010101010102070707010102020202010101010101020707070101010101010101010202010207070701010106010101010101010102070707010101010101010101010101020707070101010102020202020201010202040201010101020505050502010101010101010201010203050505020101010101010102010102050505050201010101020201020101020202020202010101010101010101010101010101010101010101010101010101010101010101010102010101010102010101010101010101010101010101010102020101010101020101010102020101010101010101010101010101010101010101010101010101010101`, img`
             . . . . . . . . . . . . 2 . . . 
             . . 2 2 2 2 . . . . . . 2 . . . 
@@ -193,7 +250,7 @@ namespace sosroom{
         for (let index = 0; index < 4; index++) {
             zhr刺客()
         }
-        pause(100)
+        pause(10000)
         zhrr刺客()
 
     }

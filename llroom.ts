@@ -4,34 +4,18 @@ namespace SpriteKind {
 }
 
 namespace llroom {
+
     let llDuck: Sprite = null
     let llSnake: Sprite = null
+    let llfire = 0
+    let llSpeed = 0
     let llHero: Sprite = null
-
     function llHasBg () {
-            tiles.setTilemap(tiles.createTilemap(hex`100010000105050505050505050505050505090203070808080808080808080808070704030707070707070708070707080808040308070808080707080708070707070403070707080709070808080808080808080807070807070708070707070707040307070b08080807080707080808080408070808080707070807070807070804080707070807070808080708070808040307070808090707070707080707070408080808070707080808080808080904030708070708080807070707090707040308080708070707070707070707070403070707080708080808080808080808030808080807070707080707070707040c08060606060608060606060808060a`, img`
-                . . . . . . . . . . . . . . . . 
-                . . 2 2 2 2 2 2 2 2 2 2 2 . . . 
-                . . . . . . . . 2 . . . 2 2 2 . 
-                . 2 . 2 2 2 . . 2 . 2 . . . . . 
-                . . . . 2 . . . 2 2 2 2 2 2 2 2 
-                2 2 . . 2 . . . 2 . . . . . . . 
-                . . . . 2 2 2 . 2 . . 2 2 2 2 . 
-                2 . 2 2 2 . . . 2 . . 2 . . 2 . 
-                2 . . . 2 . . 2 2 2 . 2 . 2 2 . 
-                . . . 2 2 . . . . . . 2 . . . . 
-                2 2 2 2 . . . 2 2 2 2 2 2 2 . . 
-                . . 2 . . 2 2 2 . . . . . . . . 
-                . 2 2 . 2 . . . . . . . . . . . 
-                . . . . 2 . 2 2 2 2 2 2 2 2 2 2 
-                . 2 2 2 2 . . . . 2 . . . . . . 
-                . 2 . . . . . 2 . . . . 2 2 . . 
-                `, [myTiles.transparency16,sprites.castle.tilePath1,sprites.castle.tilePath3,sprites.castle.tilePath4,sprites.castle.tilePath6,sprites.castle.tilePath2,sprites.castle.tilePath8,sprites.castle.tilePath5,sprites.builtin.forestTiles0,sprites.castle.tileDarkGrass2,sprites.builtin.coral2,sprites.dungeon.collectibleRedCrystal,sprites.dungeon.collectibleBlueCrystal], TileScale.Sixteen))
-            info.startCountdown(180)
-            info.setLife(3)
-            controller.moveSprite(llHero, 100, 100)
-            scene.cameraFollowSprite(llHero)
-        }
+        info.startCountdown(180)
+        info.setLife(3)
+        controller.moveSprite(llHero, 50, 50)
+        scene.cameraFollowSprite(llHero)
+    }
     function llHasHero () {
         llHero = sprites.create(img`
             . . . . . f f f f . . . . . . . 
@@ -53,7 +37,6 @@ namespace llroom {
             `, SpriteKind.Player)
         llHero.setPosition(10, 18)
     }
-
     function llHasSnake () {
         llSnake = sprites.create(img`
             . . . . c c c c c c . . . . . . 
@@ -105,31 +88,33 @@ namespace llroom {
 
     export function init() {
         controller.up.onEvent(ControllerButtonEvent.Pressed, function () {
-        llHero.setImage(img`
-            . . . . . . f f f f . . . . . . 
-            . . . . f f f 2 2 f f f . . . . 
-            . . . f f f 2 2 2 2 f f f . . . 
-            . . f f f e e e e e e f f f . . 
-            . . f f e 2 2 2 2 2 2 e e f . . 
-            . . f e 2 f f f f f f 2 e f . . 
-            . . f f f f e e e e f f f f . . 
-            . f f e f b f 4 4 f b f e f f . 
-            . f e e 4 1 f d d f 1 4 e e f . 
-            f d f e e d d d d d 4 e f f . . 
-            f b f f e e 4 4 4 e d d 4 e . . 
-            f b f 4 f 2 2 2 2 e d d e . . . 
-            f c f . f 2 2 c c c e e . . . . 
-            . f f . f 4 4 c d c 4 f . . . . 
-            . . . . f f f d d c f f . . . . 
-            . . . . . f d d c f f . . . . . 
-            `)
+            llHero.setImage(img`
+                . . . . . . f f f f . . . . . . 
+                . . . . f f f 2 2 f f f . . . . 
+                . . . f f f 2 2 2 2 f f f . . . 
+                . . f f f e e e e e e f f f . . 
+                . . f f e 2 2 2 2 2 2 e e f . . 
+                . . f e 2 f f f f f f 2 e f . . 
+                . . f f f f e e e e f f f f . . 
+                . f f e f b f 4 4 f b f e f f . 
+                . f e e 4 1 f d d f 1 4 e e f . 
+                f d f e e d d d d d 4 e f f . . 
+                f b f f e e 4 4 4 e d d 4 e . . 
+                f b f 4 f 2 2 2 2 e d d e . . . 
+                f c f . f 2 2 c c c e e . . . . 
+                . f f . f 4 4 c d c 4 f . . . . 
+                . . . . f f f d d c f f . . . . 
+                . . . . . f d d c f f . . . . . 
+                `)
         })
-        scene.onOverlapTile(SpriteKind.Player, sprites.castle.tileDarkGrass2, function (sprite, location) {
-            let llfire = 0
-            if (llfire == 0) {
-                llHero.setPosition(10, 18)
-                game.splash("路边的野花不要采！")
-                info.changeLifeBy(-1)
+        scene.onOverlapTile(SpriteKind.Player, sprites.builtin.coral5, function (sprite, location) {
+            cubicbird.destroyAllSpriteOfKind(SpriteKind.Enemy)
+            cubicbird.destroyAllSpriteOfKind(SpriteKind.Player)
+            gamejam.roomFinished(true)
+        })
+        scene.onOverlapTile(SpriteKind.Player, sprites.castle.tileDarkGrass1, function (sprite, location) {
+            if (llSpeed == 0) {
+                controller.moveSprite(llHero, 25, 25)
             }
         })
         controller.left.onEvent(ControllerButtonEvent.Pressed, function () {
@@ -152,7 +137,24 @@ namespace llroom {
                 . . . . . . . . . f f f . . . . 
                 `)
         })
-        
+        scene.onOverlapTile(SpriteKind.Player, sprites.castle.shrub, function (sprite, location) {
+            if (llSpeed == 0) {
+                controller.moveSprite(llHero, 15, 15)
+            }
+        })
+        scene.onOverlapTile(SpriteKind.Player, sprites.dungeon.chestClosed, function (sprite, location) {
+            game.splash("一个数字，去掉前面一个数字后，是13。去掉最后一个数字后，是40。这个数字是什么？")
+            if (game.askForNumber("", 3) == 43) {
+                controller.moveSprite(llHero, 80, 80)
+                llSpeed = 1
+            } else {
+                game.splash("答错了")
+                lantern.startLanternEffect(llHero)
+                lantern.setLightBandWidth(10)
+                controller.moveSprite(llHero, 50, 50)
+            }
+            tiles.setTileAt(location, sprites.castle.tilePath5)
+        })
         controller.right.onEvent(ControllerButtonEvent.Pressed, function () {
             llHero.setImage(img`
                 . . . . . f f f f . . . . . . . 
@@ -193,22 +195,58 @@ namespace llroom {
                 . . . . . . . . . . e e . . . . 
                 `)
         })
+        scene.onOverlapTile(SpriteKind.Player, sprites.castle.tileDarkGrass2, function (sprite, location) {
+            if (llfire == 0) {
+                llHero.setPosition(10, 18)
+                game.splash("路边的野花不要采！")
+                info.changeLifeBy(-1)
+            }
+        })
+        info.onLifeZero(function () {
+            gamejam.roomFinished(false)
+        })
         sprites.onOverlap(SpriteKind.Player, SpriteKind.llEnemy, function (sprite, otherSprite) {
             info.changeLifeBy(-1)
-            llHero.setPosition(10, 18)
-            llHero.setVelocity(20, 20)
+            llHero.setPosition(randint(0, 256), randint(0, 256))
+            if (llSpeed == 0) {
+                controller.moveSprite(llHero, 25, 25)
+            }
         })
-        
+
+        scene.onOverlapTile(SpriteKind.Player, sprites.dungeon.collectibleRedCrystal, function (sprite, location) {
+            tiles.setTileAt(location, sprites.castle.tilePath5)
+            game.splash("恭喜你可以采花啦")
+            llfire = 1
+            info.startCountdown(180)
+            info.setLife(3)
+        })
         sprites.onOverlap(SpriteKind.Player, SpriteKind.Enemy, function (sprite, otherSprite) {
             info.changeLifeBy(-1)
             llHero.setPosition(10, 18)
         })
-       
+        tiles.setTilemap(tiles.createTilemap(hex`1000100001040404040404040404040404040a0a02060707070707070707070707060603020606060606060607060606070707030207060707070606070b07060606060302060606070608060707070707070707070706060706060607060606060606030206060907070706070606070707070307060707070606060706060706060703070606060706060707070607060706030206060707080606060606070606060307070707060606070707070707070803020607060607070706060606080606030207070607060606060c0c0606060c0c02060606070607070707070707070707070707070706060606070606060606030d050505050505070505050507070507`, img`
+            . . . . . . . . . . . . . . . . 
+            . . 2 2 2 2 2 2 2 2 2 2 2 . . . 
+            . . . . . . . . 2 . . . 2 2 2 . 
+            . 2 . 2 2 2 . . 2 . 2 . . . . . 
+            . . . . 2 . . . 2 2 2 2 2 2 2 2 
+            2 2 . . 2 . . . 2 . . . . . . . 
+            . . . . 2 2 2 . 2 . . 2 2 2 2 . 
+            2 . 2 2 2 . . . 2 . . 2 . . 2 . 
+            2 . . . 2 . . 2 2 2 . 2 . 2 . . 
+            . . . 2 2 . . . . . . 2 . . . . 
+            2 2 2 2 . . . 2 2 2 2 2 2 2 . . 
+            . . 2 . . 2 2 2 . . . . . . . . 
+            . 2 2 . 2 . . . . . . . . . . . 
+            . . . . 2 . 2 2 2 2 2 2 2 2 2 2 
+            2 2 2 2 2 . . . . 2 . . . . . . 
+            . . . . . . . 2 . . . . 2 2 . 2 
+            `, [myTiles.transparency16,sprites.castle.tilePath1,sprites.castle.tilePath4,sprites.castle.tilePath6,sprites.castle.tilePath2,sprites.castle.tilePath8,sprites.castle.tilePath5,sprites.builtin.forestTiles0,sprites.castle.tileDarkGrass2,sprites.dungeon.collectibleRedCrystal,sprites.castle.tileDarkGrass1,sprites.dungeon.chestClosed,sprites.castle.shrub,sprites.builtin.coral5], TileScale.Sixteen))
+        game.splash("hi，欢迎来到迷宫，想一切办法出去！")
         llHasHero()
         llHasSnake()
         llHasBg()
         llHasDuck()
-        game.splash("hi，欢迎来到迷宫，想一切办法出去！")
     }   
 }
 
