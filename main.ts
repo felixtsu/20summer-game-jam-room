@@ -5,6 +5,9 @@ gamejam.registerRoom(function(){
     dazunroom.init()
 })
 gamejam.registerRoom(function(){
+    llroom.init()
+})
+gamejam.registerRoom(function(){
     sosroom.init()
 })
 gamejam.registerRoom(function(){

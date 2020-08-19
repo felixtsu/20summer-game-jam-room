@@ -1,13 +1,14 @@
 {
-    "name": "20.summer.game.jam",
+    "name": "20.summer.game.jam.room",
     "description": "",
     "dependencies": {
         "device": "*",
         "cubicbird-helper-blocks": "github:felixtsu/cubicbird-helper-blocks#v0.6.0",
         "pxt-lantern": "github:felixtsu/pxt-lantern#v0.1.2",
-        "cubicbird-game-jam": "github:felixtsu/cubicbird-game-jam#v0.0.4",
         "arcade-sprite-data": "github:microsoft/arcade-sprite-data#v0.1.0",
-        "animation": "*"
+        "animation": "*",
+        "hw": "*",
+        "cubicbird-game-jam": "github:felixtsu/cubicbird-game-jam#master"
     },
     "files": [
         "main.blocks",
@@ -19,7 +20,8 @@
         "fightroom.ts",
         "sosroom.ts",
         "101room.ts",
-        "dazunroom.ts"
+        "dazunroom.ts",
+        "llroom.ts"
     ],
     "testFiles": [
         "test.ts"
