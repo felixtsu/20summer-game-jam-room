@@ -29,6 +29,36 @@
         "mimeType": "image/x-mkcd-f4",
         "tilemapTile": true
     },
+    "zhrtile1": {
+        "data": "hwQQABAAAAD//////////1VVVVVVVVVV//////X/////////9f/////////1//////////X/////////9f/////////1//////////X/////////9f/////////1//////////X/////////9f/////////1////VVVVVVVVVVX//////////w==",
+        "mimeType": "image/x-mkcd-f4",
+        "tilemapTile": true
+    },
+    "zhrtile3": {
+        "data": "hwQQABAAAAD//////4j////MzP//j//////P/P+P///////M/4///////8//j//8//+Iqqr4//z/j/iqqv/P//+I/6qqz8z///jPqqrM////+Myqqv/////4/P+P///////8/4////////z/j/j//////P//iP/////P//+PiP///8/8/////w==",
+        "mimeType": "image/x-mkcd-f4",
+        "tilemapTile": true
+    },
+    "zhrtile4": {
+        "data": "hwQQABAAAACZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZlpmZmZmZaZZmmZmZmZlplmaWmZmZmZmZZpmZmZmZmZmWmZmZmZmZmZmZmQ==",
+        "mimeType": "image/x-mkcd-f4",
+        "tilemapTile": true
+    },
+    "zhrtile2": {
+        "data": "hwQQABAAAABmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZg==",
+        "mimeType": "image/x-mkcd-f4",
+        "tilemapTile": true
+    },
+    "zhrtile5": {
+        "data": "hwQQABAAAADu7u7u7u7u7u7u7u7u7u7u7u7u7u7u7u7u7u7u7u7u7u7u7u7u7u7u7u7u7u7u7u7u7u7u7u7u7u7u7u7u7u7u7u7u7u7u7u7u7u7u7u7u7u7u7u7u7u7u7u7u7u7u7u7u7u7u7u7u7u7u7u7u7u7u7u7u7u7u7u7u7u7u7u7u7g==",
+        "mimeType": "image/x-mkcd-f4",
+        "tilemapTile": true
+    },
+    "zhrtile6": {
+        "data": "hwQQABAAAAD//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////w==",
+        "mimeType": "image/x-mkcd-f4",
+        "tilemapTile": true
+    },
     "zyxtile1": {
         "data": "hwQQABAAAAAA7u7u7u7u7uCe6e7u7p7u4JlZVVWZme7g+SmZWZWZ7p6ZKZmZVZnunpkpWVVZme6emSlZVVmZ7p6ZKVlXWZnunpkpWVVZme6emSlZVVmZ7p6ZKVlVVZnunpkpmZmVme6e+SmZVZmZ7uCZWVWVmZnu4Jnp7u7unu7g7u7u7u7u7g==",
         "mimeType": "image/x-mkcd-f4",
