@@ -1,0 +1,35 @@
+{
+    "name": "20.summer.game.jam",
+    "description": "",
+    "dependencies": {
+        "device": "*",
+        "cubicbird-helper-blocks": "github:felixtsu/cubicbird-helper-blocks#v0.6.0",
+        "pxt-lantern": "github:felixtsu/pxt-lantern#v0.1.2",
+        "cubicbird-game-jam": "github:felixtsu/cubicbird-game-jam#v0.0.4",
+        "arcade-sprite-data": "github:microsoft/arcade-sprite-data#v0.1.0",
+        "animation": "*"
+    },
+    "files": [
+        "main.blocks",
+        "main.ts",
+        "README.md",
+        "flow.room.ts",
+        "tilemap.g.ts",
+        "tilemap.g.jres",
+        "fightroom.ts",
+        "sosroom.ts",
+        "101room.ts",
+        "dazunroom.ts"
+    ],
+    "testFiles": [
+        "test.ts"
+    ],
+    "targetVersions": {
+        "target": "1.0.16",
+        "targetId": "arcade"
+    },
+    "supportedTargets": [
+        "arcade"
+    ],
+    "preferredEditor": "tsprj"
+}

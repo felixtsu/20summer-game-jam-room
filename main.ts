@@ -1,0 +1,16 @@
+gamejam.registerRoom(function(){
+    flowroom.init()
+})
+gamejam.registerRoom(function(){
+    dazunroom.init()
+})
+gamejam.registerRoom(function(){
+    sosroom.init()
+})
+gamejam.registerRoom(function(){
+    fightroom.init()
+})
+gamejam.registerRoom(function(){
+    one0oneroom.init()
+})
+gamejam.startGameJam() 
