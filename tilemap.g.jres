@@ -249,6 +249,11 @@
         "mimeType": "image/x-mkcd-f4",
         "tilemapTile": true
     },
+    "xcxtile5": {
+        "data": "hwQQABAAAAC7u7u7u7u7u7u7u7u7u7u7u7u7u7u7u7u7u7u7u7u7u7u7u7u7u7u7u7u7u7u7u7u7u7u7u7u7u7u7u7u7u7u7u7u7u7u7u7u7u7u7u7u7u7u7u7u7u7u7u7u7u7u7u7u7u7u7u7u7u7u7u7u7u7u7u7u7u7u7u7u7u7u7u7u7uw==",
+        "mimeType": "image/x-mkcd-f4",
+        "tilemapTile": true
+    },
     "dztile3": {
         "data": "hwQQABAAAAAAkJCQAAkAAACQkJCQCQAAAJCZkJkAAAAAAAkJAAAAAAAACZkAAAAAAAAJkAAACQAAAAmQCZAJAAAACQCQmQAAAAAJAAAAAAAAAJkAAAAAAAAAkAkACQAAAAAAkJkJAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
         "mimeType": "image/x-mkcd-f4",
