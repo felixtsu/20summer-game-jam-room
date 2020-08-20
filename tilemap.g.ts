@@ -101,6 +101,8 @@ namespace myTiles {
     //% fixedInstance jres blockIdentity=images._tile
     export const xcxtile4 = image.ofBuffer(hex``);
     //% fixedInstance jres blockIdentity=images._tile
+    export const xcxtile5 = image.ofBuffer(hex``);
+    //% fixedInstance jres blockIdentity=images._tile
     export const dztile3 = image.ofBuffer(hex``);
     //% fixedInstance jres blockIdentity=images._tile
     export const dztile4 = image.ofBuffer(hex``);
