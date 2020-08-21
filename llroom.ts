@@ -57,26 +57,25 @@ namespace llroom {
         llDuck.setFlag(SpriteFlag.BounceOnWall, true)
     }
 
-
     function llHasBg () {
         tiles.setTilemap(tiles.createTilemap(hex`1000100001040404040404040404040404040a0a02060707070706070707070707060603070606070606060607060606070707030207060707070606060607060606060302060606060608060707070707070607070706070706060607060606060606030206060907070706070706070707070302070707070606060606060706060603020706070606070707070607060707030206060707080706060606070606060307070607060606070707070707070703020606070607070606060606080706030207070606070606070b0b0606060b0b02060606070707060607070707070707070707070706070706060707060606030c050505050505050505050505070507`, img`
-            . . . . . . . . . . . . . . . . 
-            . . 2 2 2 2 . 2 2 2 2 2 2 . . . 
-            2 . . 2 . . . . 2 . . . 2 2 2 . 
-            . 2 . 2 2 2 . . . . 2 . . . . . 
-            . . . . . . . . 2 2 2 2 2 2 . 2 
-            2 2 . 2 2 . . . 2 . . . . . . . 
-            . . . . 2 2 2 . 2 2 . 2 2 2 2 . 
-            . 2 2 2 2 . . . . . . 2 . . . . 
-            . 2 . 2 . . 2 2 2 2 . 2 . 2 2 . 
-            . . . 2 2 . 2 . . . . 2 . . . . 
-            2 2 . 2 . . . 2 2 2 2 2 2 2 2 . 
-            . . . 2 . 2 2 . . . . . . 2 . . 
-            . 2 2 . . 2 . . 2 . . . . . . . 
-            . . . . 2 2 2 . . 2 2 2 2 2 2 2 
-            2 . 2 2 2 . 2 2 . . 2 2 . . . . 
-            . . . . . . . . . . . . . 2 . 2 
-            `, [myTiles.transparency16,sprites.castle.tilePath1,sprites.castle.tilePath4,sprites.castle.tilePath6,sprites.castle.tilePath2,sprites.castle.tilePath8,sprites.castle.tilePath5,sprites.builtin.forestTiles0,sprites.castle.tileDarkGrass2,sprites.dungeon.collectibleRedCrystal,sprites.castle.tileDarkGrass1,sprites.castle.shrub,sprites.builtin.coral5], TileScale.Sixteen))
+            . . . . . . . . . . . . . . . .
+            . . 2 2 2 2 . 2 2 2 2 2 2 . . .
+            2 . . 2 . . . . 2 . . . 2 2 2 .
+            . 2 . 2 2 2 . . . . 2 . . . . .
+            . . . . . . . . 2 2 2 2 2 2 . 2
+            2 2 . 2 2 . . . 2 . . . . . . .
+            . . . . 2 2 2 . 2 2 . 2 2 2 2 .
+            . 2 2 2 2 . . . . . . 2 . . . .
+            . 2 . 2 . . 2 2 2 2 . 2 . 2 2 .
+            . . . 2 2 . 2 . . . . 2 . . . .
+            2 2 . 2 . . . 2 2 2 2 2 2 2 2 .
+            . . . 2 . 2 2 . . . . . . 2 . .
+            . 2 2 . . 2 . . 2 . . . . . . .
+            . . . . 2 2 2 . . 2 2 2 2 2 2 2
+            2 . 2 2 2 . 2 2 . . 2 2 . . . .
+            . . . . . . . . . . . . . 2 . 2
+        `, [myTiles.transparency16,sprites.castle.tilePath1,sprites.castle.tilePath4,sprites.castle.tilePath6,sprites.castle.tilePath2,sprites.castle.tilePath8,sprites.castle.tilePath5,sprites.builtin.forestTiles0,sprites.castle.tileDarkGrass2,sprites.dungeon.collectibleRedCrystal,sprites.castle.tileDarkGrass1,sprites.castle.shrub,sprites.builtin.coral5], TileScale.Sixteen))
         tiles.setTileAt(tiles.getTileLocation(9, 3), sprites.dungeon.chestClosed)
         info.startCountdown(180)
         info.setLife(3)
@@ -229,7 +228,7 @@ namespace llroom {
                 controller.moveSprite(llHero, 15, 15)
             }
         })
-
+    
         scene.onOverlapTile(SpriteKind.Player, sprites.dungeon.chestClosed, function (sprite, location) {
             game.splash("一个数字，去掉前面一个数字后，是13。去掉最后一个数字后，是40。这个数字是什么？")
             if (game.askForNumber("", 3) == 43) {
@@ -289,6 +288,7 @@ namespace llroom {
                 . . . . . . . . . f f f . . . . 
                 `)
         })
+
         sprites.onOverlap(SpriteKind.Player, SpriteKind.llEnemy2, function (sprite, otherSprite) {
             info.setLife(0)
             llDestroy()

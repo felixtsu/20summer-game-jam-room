@@ -71,6 +71,7 @@ namespace dazunroom{
         pause(500)
         Dzflame.destroy()
     }
+
     let Dztrapflag = 0
     let Dzflame: Sprite = null
     let DzTnt: Sprite = null
@@ -639,53 +640,6 @@ namespace dazunroom{
         tiles.placeOnTile(Dzhero, tiles.getTileLocation(2, 8))
         game.splash("植物有毒不能碰")
     })
-    function Dzboom () {
-        DzTnt = sprites.create(img`
-            . . . . . . . . . . . . . . 
-            . . . . . . . . . . . . . . 
-            . . . . . . . . . . . . . . 
-            . . . . . . . . . . . . . . 
-            . . . . 4 4 e 4 4 e 4 4 . . 
-            . . . . f f f f f f f f . . 
-            . . . . 4 4 e 4 4 e 4 4 . . 
-            . . . . 4 4 e 4 4 e 4 4 . . 
-            . . . . f f f f f f f f . . 
-            . . . . 4 4 e 4 4 e 4 4 . . 
-            . . . . 4 4 e 4 4 e 4 4 . . 
-            . . . . f f f f f f f f . . 
-            . . . . 4 4 e 4 4 e 4 4 . . 
-            . . . . . . . . . . . . . . 
-            `, SpriteKind.Dzc4)
-        DzTnt.setPosition(Dzhero.x, Dzhero.y)
-        DzTnt.say("3")
-        pause(1000)
-        DzTnt.say("2")
-        pause(1000)
-        DzTnt.say("1")
-        pause(1000)
-        DzTnt.destroy()
-        Dzflame = sprites.create(img`
-            . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 
-            . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 
-            . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 
-            . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 
-            . 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 
-            . 5 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 5 
-            . 5 2 4 4 4 4 4 4 4 4 4 4 4 4 4 4 4 4 4 4 4 4 4 4 4 4 4 4 4 4 4 4 4 2 5 
-            . 5 2 4 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 4 2 5 
-            . 5 2 4 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 4 2 5 
-            . 5 2 4 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 4 2 5 
-            . 5 2 4 4 4 4 4 4 4 4 4 4 4 4 4 4 4 4 4 4 4 4 4 4 4 4 4 4 4 4 4 4 4 2 5 
-            . 5 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 5 
-            . 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 
-            . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 
-            . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 
-            . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 
-            `, SpriteKind.Dzflame)
-        Dzflame.setPosition(DzTnt.x, DzTnt.y)
-        pause(500)
-        Dzflame.destroy()
-    }
     controller.left.onEvent(ControllerButtonEvent.Pressed, function () {
         animation.runImageAnimation(
         Dzhero,
