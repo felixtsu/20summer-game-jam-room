@@ -8,7 +8,7 @@
         "arcade-sprite-data": "github:microsoft/arcade-sprite-data#v0.1.0",
         "animation": "*",
         "hw": "*",
-        "cubicbird-game-jam": "github:felixtsu/cubicbird-game-jam#v0.0.7"
+        "cubicbird-game-jam": "github:felixtsu/cubicbird-game-jam#master"
     },
     "files": [
         "main.blocks",

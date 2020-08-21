@@ -101,6 +101,7 @@ namespace sosroom{
             cubicbird.destroyAllSpriteOfKind(SpriteKind.Zhr铲子)
             cubicbird.destroyAllSpriteOfKind(SpriteKind.Zhr传送门)
             cubicbird.destroyAllSpriteOfKind(SpriteKind.Zhr蛇)
+            lantern.stopLanternEffect()
             gamejam.roomFinished(false)
         })
         sprites.onOverlap(SpriteKind.Zhr, SpriteKind.Zhr传送门, function (sprite, otherSprite) {
@@ -137,12 +138,13 @@ namespace sosroom{
                 cubicbird.destroyAllSpriteOfKind(SpriteKind.Zhr铲子)
                 cubicbird.destroyAllSpriteOfKind(SpriteKind.Zhr传送门)
                 cubicbird.destroyAllSpriteOfKind(SpriteKind.Zhr蛇)
+                lantern.stopLanternEffect()
                 gamejam.roomFinished(false)
             }
         })
-        controller.A.onEvent(ControllerButtonEvent.Pressed, function () {
+        controller.A.onEvent(ControllerButtonEvent.Released, function () {
             if (Zhr.tileKindAt(TileDirection.Center, sprites.castle.tileDarkGrass3)) {
-                if (Math.percentChance(70)) {
+                if (Math.percentChance(30)) {
                     if (Zhrr铲子 == 1) {
                         tiles.setTileAt(tiles.getTileLocation(cubicbird.tileColumnOfSprite(Zhr), cubicbird.tileRowOfSprite(Zhr)), myTiles.zhrtile5)
                         Zhr钥 = sprites.create(img`
@@ -193,6 +195,7 @@ namespace sosroom{
                         cubicbird.destroyAllSpriteOfKind(SpriteKind.Zhr铲子)
                         cubicbird.destroyAllSpriteOfKind(SpriteKind.Zhr蛇)
                         cubicbird.destroyAllSpriteOfKind(SpriteKind.Zhr传送门)
+                        lantern.stopLanternEffect()
                         gamejam.roomFinished(false)
                     }
                 }
@@ -238,6 +241,7 @@ namespace sosroom{
             cubicbird.destroyAllSpriteOfKind(SpriteKind.Zhr传送门)
             cubicbird.destroyAllSpriteOfKind(SpriteKind.Zhr铲子)
             cubicbird.destroyAllSpriteOfKind(SpriteKind.Zhr蛇)
+            lantern.stopLanternEffect()
             gamejam.roomFinished(true)
         })
 

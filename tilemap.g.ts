@@ -17,6 +17,18 @@ namespace myTiles {
     //% fixedInstance jres blockIdentity=images._tile
     export const zgltile7 = image.ofBuffer(hex``);
     //% fixedInstance jres blockIdentity=images._tile
+    export const zhrtile1 = image.ofBuffer(hex``);
+    //% fixedInstance jres blockIdentity=images._tile
+    export const zhrtile3 = image.ofBuffer(hex``);
+    //% fixedInstance jres blockIdentity=images._tile
+    export const zhrtile4 = image.ofBuffer(hex``);
+    //% fixedInstance jres blockIdentity=images._tile
+    export const zhrtile2 = image.ofBuffer(hex``);
+    //% fixedInstance jres blockIdentity=images._tile
+    export const zhrtile5 = image.ofBuffer(hex``);
+    //% fixedInstance jres blockIdentity=images._tile
+    export const zhrtile6 = image.ofBuffer(hex``);
+    //% fixedInstance jres blockIdentity=images._tile
     export const zyxtile1 = image.ofBuffer(hex``);
     //% fixedInstance jres blockIdentity=images._tile
     export const zyxtile2 = image.ofBuffer(hex``);
@@ -77,18 +89,6 @@ namespace myTiles {
     //% fixedInstance jres blockIdentity=images._tile
     export const zyxtile30 = image.ofBuffer(hex``);
     //% fixedInstance jres blockIdentity=images._tile
-    export const zhrtile1 = image.ofBuffer(hex``);
-    //% fixedInstance jres blockIdentity=images._tile
-    export const zhrtile3 = image.ofBuffer(hex``);
-    //% fixedInstance jres blockIdentity=images._tile
-    export const zhrtile4 = image.ofBuffer(hex``);
-    //% fixedInstance jres blockIdentity=images._tile
-    export const zhrtile2 = image.ofBuffer(hex``);
-    //% fixedInstance jres blockIdentity=images._tile
-    export const zhrtile5 = image.ofBuffer(hex``);
-    //% fixedInstance jres blockIdentity=images._tile
-    export const zhrtile6 = image.ofBuffer(hex``);
-    //% fixedInstance jres blockIdentity=images._tile
     export const xcxtile8 = image.ofBuffer(hex``);
     //% fixedInstance jres blockIdentity=images._tile
     export const xcxtile9 = image.ofBuffer(hex``);
@@ -108,5 +108,15 @@ namespace myTiles {
     export const dztile4 = image.ofBuffer(hex``);
     //% fixedInstance jres blockIdentity=images._tile
     export const dztile5 = image.ofBuffer(hex``);
+
+    helpers.registerTilemapFactory(function(name: string) {
+        switch(helpers.stringTrim(name)) {
+            case "level": return tiles.createTilemap(hex`0100010000`, img`
+. 
+`, [myTiles.transparency16], TileScale.Sixteen)
+        }
+        return null;
+    })
+
 }
 // Auto-generated code. Do not edit.
