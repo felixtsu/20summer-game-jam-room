@@ -440,23 +440,22 @@ namespace one0oneroom {
             game.splash("或许有什么帮助")
             pause(10000)
         })
-
         tiles.setTilemap(tiles.createTilemap(hex`0e000e000a06060606060606060606060607090110101010101010101014120b0905040404040404110404150f0b0905041104130404040404040f0b0905040404040404110404040f0b0905130404110404040404040f0b0905040404040404040404110f0b0905040404110404110404040f0b0905041104041604040404040f0b0905040404040404041304040f0b0905040411040411040411040f0b0905130404040404040404170f0b09020e0e0e0e0e0e0e0e0e0e030b080d0d0d0d0d0d0d0d0d0d0d0d0c`, img`
-            2 2 2 2 2 2 2 2 2 2 2 2 2 2 
-            2 . . . . . . . . . . . . 2 
-            2 . . . . . . . . . . . . 2 
-            2 . . . . . . . . . . . . 2 
-            2 . . . . . . . . . . . . 2 
-            2 . . . . . . . . . . . . 2 
-            2 . . . . . . . . . . . . 2 
-            2 . . . . . . . . . . . . 2 
-            2 . . . . . . . . . . . . 2 
-            2 . . . . . . . . . . . . 2 
-            2 . . . . . . . . . . . . 2 
-            2 . . . . . . . . . . . . 2 
-            2 . . . . . . . . . . . . 2 
-            2 2 2 2 2 2 2 2 2 2 2 2 2 2 
-            `, [myTiles.transparency16,sprites.dungeon.darkGroundNorthWest0,sprites.dungeon.darkGroundSouthWest0,sprites.dungeon.darkGroundSouthEast0,sprites.dungeon.darkGroundCenter,sprites.dungeon.darkGroundWest,sprites.dungeon.purpleOuterNorth0,sprites.dungeon.purpleOuterNorthEast,sprites.dungeon.purpleOuterSouthEast,sprites.dungeon.purpleOuterWest0,sprites.dungeon.purpleOuterNorthWest,sprites.dungeon.purpleOuterEast1,sprites.dungeon.purpleOuterSouthWest,sprites.dungeon.purpleOuterSouth1,sprites.dungeon.darkGroundSouth,sprites.dungeon.darkGroundEast,sprites.dungeon.darkGroundNorth,myTiles.xcxtile9,sprites.dungeon.darkGroundNorthEast0,myTiles.xcxtile1,myTiles.xcxtile2,myTiles.xcxtile3,myTiles.xcxtile4,myTiles.xcxtile5], TileScale.Sixteen))
+            2 2 2 2 2 2 2 2 2 2 2 2 2 2
+            2 . . . . . . . . . . . . 2
+            2 . . . . . . . . . . . . 2
+            2 . . . . . . . . . . . . 2
+            2 . . . . . . . . . . . . 2
+            2 . . . . . . . . . . . . 2
+            2 . . . . . . . . . . . . 2
+            2 . . . . . . . . . . . . 2
+            2 . . . . . . . . . . . . 2
+            2 . . . . . . . . . . . . 2
+            2 . . . . . . . . . . . . 2
+            2 . . . . . . . . . . . . 2
+            2 . . . . . . . . . . . . 2
+            2 2 2 2 2 2 2 2 2 2 2 2 2 2
+        `, [myTiles.transparency16,sprites.dungeon.darkGroundNorthWest0,sprites.dungeon.darkGroundSouthWest0,sprites.dungeon.darkGroundSouthEast0,sprites.dungeon.darkGroundCenter,sprites.dungeon.darkGroundWest,sprites.dungeon.purpleOuterNorth0,sprites.dungeon.purpleOuterNorthEast,sprites.dungeon.purpleOuterSouthEast,sprites.dungeon.purpleOuterWest0,sprites.dungeon.purpleOuterNorthWest,sprites.dungeon.purpleOuterEast1,sprites.dungeon.purpleOuterSouthWest,sprites.dungeon.purpleOuterSouth1,sprites.dungeon.darkGroundSouth,sprites.dungeon.darkGroundEast,sprites.dungeon.darkGroundNorth,myTiles.xcxtile9,sprites.dungeon.darkGroundNorthEast0,myTiles.xcxtile1,myTiles.xcxtile2,myTiles.xcxtile3,myTiles.xcxtile4,myTiles.xcxtile5], TileScale.Sixteen))
         xcxplayer()
         for (let index = 0; index < 9; index++) {
             XCX血液函数()

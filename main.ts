@@ -1,5 +1,5 @@
 gamejam.registerRoom(function(){
-    gamejam.drawNextRoom('朱古力', 'Flow Control Room')
+    gamejam.drawNextRoom('朱古力', 'Flow Room')
     flowroom.init()
 })
 gamejam.registerRoom(function(){
